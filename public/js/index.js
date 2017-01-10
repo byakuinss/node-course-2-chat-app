@@ -8,11 +8,6 @@ socket.on('connect', function() {
     // 	text: 'You can not find me, you idiot.'
     // });
 
-    socket.emit('createMessage', {
-    	from: 'loki',
-    	text: 'Huh!'
-    });
-
 });
 socket.on('disconnect', function() {
     console.log('Disconnected from server.');

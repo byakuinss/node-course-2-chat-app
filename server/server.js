@@ -30,14 +30,13 @@ io.on('connection', (socket) => {
 	// 	console.log('createEmail', newEmail);
 	// });
 
-	socket.emit('newMessage', {
-		from: 'thor',
-		text: 'hey',
-		createdAt: 123
-	});
-
 	socket.on('createMessage', (newMessage) => {
 		console.log('createMessage', newMessage);
+		io.emit('newMessage', {
+			from: newMessage.from,
+			text: newMessage.text,
+			createdAt: new Date().getTime()
+		});
 	});
 
 	socket.on('disconnect', () => {
