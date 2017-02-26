@@ -21,15 +21,25 @@ app.use(express.static(publicPath));
 
 //register connection
 io.on('connection', (socket) => {
-    console.log('New user connected');
-
+    console.log('New user connected: ', socket.id);
 
     socket.on('join', (params, callback) => {
         if (!isRealString(params.name) || !isRealString(params.room)) {
-            return callback('Name and room name are required.');
+            return callback('Name and room name are required.');            
         }
 
+        //make room case insentitive
+        params.room = params.room.toLowerCase();
+
         socket.join(params.room);
+
+        //check username is existed
+        var check_username = users.isUserExist(params.name, params.room);
+        if (check_username) {
+           console.log('username is existed.');
+            return callback('username is existed.');
+        }        
+
         users.removeUser(socket.id);
         users.addUser(socket.id, params.name, params.room);
 

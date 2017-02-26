@@ -78,4 +78,13 @@ describe('Users', () => {
 		expect(userList).toEqual(['grace']);
 	})	
 
+	it('should find the user if the username has exist', () => {
+
+		var username = 'yuki';
+		var userroom = 'Node Course';
+		var user = users.isUserExist(username, userroom);
+		expect(user.name).toBe(username);
+	})
+
+
 })

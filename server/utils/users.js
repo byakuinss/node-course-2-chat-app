@@ -44,6 +44,11 @@ class Users {
 		return namesArray;
 	}
 
+	isUserExist(name, room){
+		return this.users.filter((user) => user.name === name && user.room === room)[0];
+	}
+
+
 }
 
 module.exports = {Users};
